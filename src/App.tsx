@@ -230,21 +230,24 @@ function App() {
                   Take a closer look at the sleek interface and powerful features of JazzCash Business
                 </p>
               </div>
-              <div className="flex overflow-x-auto pb-6 space-x-4 snap-x scrollbar-hide justify-start">
+              <div className="flex overflow-x-auto pb-6 space-x-4 snap-x scrollbar-hide justify-start" style={{scrollbarWidth: 'none'}}>
                 <img 
                   src="/cbq-assets/screenshot1.jpeg" 
                   alt="JazzCash Business App Preview 1" 
-                  className="w-52 h-40 rounded-lg shadow-lg snap-start bg-white object-contain" 
+                  className="w-full max-w-[340px] h-[600px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
+                  style={{minWidth: '340px', maxWidth: '340px'}}
                 />
                 <img 
                   src="/cbq-assets/screenshot2.png" 
                   alt="JazzCash Business App Preview 2" 
-                  className="w-52 h-40 rounded-lg shadow-lg snap-start bg-white object-contain" 
+                  className="w-full max-w-[340px] h-[600px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
+                  style={{minWidth: '340px', maxWidth: '340px'}}
                 />
                 <img 
                   src="/cbq-assets/screenshot3.png" 
                   alt="JazzCash Business App Preview 3" 
-                  className="w-52 h-40 rounded-lg shadow-lg snap-start bg-white object-contain" 
+                  className="w-full max-w-[340px] h-[600px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
+                  style={{minWidth: '340px', maxWidth: '340px'}}
                 />
               </div>
             </div>
