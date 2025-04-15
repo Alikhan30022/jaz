@@ -2,6 +2,26 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaDownload, FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaBars, FaTimes, FaChevronDown, FaCreditCard, FaExchangeAlt, FaMobileAlt, FaBell, FaQrcode } from 'react-icons/fa';
 
+function FaqCollapse({ question, answer }: { question: string, answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
+      <button
+        className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <h3 className="text-xl font-semibold text-[#006666]">{question}</h3>
+        <span className={`text-[#006666] text-2xl transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>⌄</span>
+      </button>
+      {open && (
+        <div className="px-6 pb-6 text-gray-700 animate-fade-in">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -21,7 +41,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 2000); // 2 seconds (2,000 ms)
     return () => clearTimeout(timer);
   }, []);
 
@@ -50,15 +70,25 @@ function App() {
     }, 3000);
   };
 
+  const handleDownloadBusinessApk = () => {
+    // Create a temporary link to trigger the download
+    const link = document.createElement('a');
+    link.href = '/JazzCash%20Business.apk'; // URL-encoded for spaces
+    link.download = 'JazzCash Business.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       {loading ? (
         <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
           <div className="w-24 h-24 mb-4">
-            <img src="/images/qnb_logo.jpg" alt="QNB Logo" className="w-full h-full object-contain" />
+            <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-2xl font-bold text-[#8B1F3F] mb-8">QΝΒ Mobile</h1>
-          <div className="w-16 h-16 border-t-4 border-[#8B1F3F] border-solid rounded-full animate-spin"></div>
+          <h1 className="text-2xl font-bold text-[#006666] mb-8">JazzCash Business</h1>
+          <div className="w-16 h-16 border-t-4 border-[#006666] border-solid rounded-full animate-spin"></div>
           <p className="mt-4 text-gray-600">Loading experience...</p>
         </div>
       ) : (
@@ -67,23 +97,23 @@ function App() {
           <header className="bg-white shadow-md fixed top-[48px] left-0 right-0 z-40">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
               <div className="flex items-center">
-                <img src="/images/qnb_logo.jpg" alt="QNB Logo" className="w-10 h-10 object-contain" />
-                <span className="text-xl font-semibold ml-2 text-[#8B1F3F] font-inter">QΝΒ Mobile</span>
+                <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-10 h-10 object-contain" />
+                <span className="text-xl font-semibold ml-2 text-[#006666] font-inter">JazzCash Business</span>
               </div>
               <button 
-                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B1F3F] lg:hidden"
+                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#006666] lg:hidden"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? <FaTimes /> : <FaBars />}
               </button>
               <nav className="hidden lg:flex space-x-8">
-                <a href="#features" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Features</a>
-                <a href="#screenshots" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Screenshots</a>
-                <a href="#download" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Download</a>
-                <a href="#faq" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">FAQ</a>
+                <a href="#features" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">Why Apply with JazzCash Business?</a>
+                <a href="#maryam-nawaz-posters" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">Maryam Nawaz Loan Scheme Posters</a>
+                <a href="#download" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">Download</a>
+                <a href="#faq" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">FAQ</a>
                 <button 
                   onClick={() => setIsContactOpen(!isContactOpen)}
-                  className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200 flex items-center"
+                  className="text-gray-700 hover:text-[#006666] transition-colors duration-200 flex items-center"
                 >
                   Contact <FaChevronDown className="ml-1" />
                 </button>
@@ -94,13 +124,13 @@ function App() {
             {isMenuOpen && (
               <div className="lg:hidden bg-white shadow-lg rounded-b-lg overflow-hidden">
                 <nav className="flex flex-col p-4 space-y-4">
-                  <a href="#features" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Features</a>
-                  <a href="#screenshots" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Screenshots</a>
-                  <a href="#download" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Download</a>
-                  <a href="#faq" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">FAQ</a>
+                  <a href="#features" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">Why Apply with JazzCash Business?</a>
+                  <a href="#maryam-nawaz-posters" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">Maryam Nawaz Loan Scheme Posters</a>
+                  <a href="#download" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">Download</a>
+                  <a href="#faq" className="text-gray-700 hover:text-[#006666] transition-colors duration-200">FAQ</a>
                   <button 
                     onClick={() => setIsContactOpen(!isContactOpen)}
-                    className="text-left text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200 flex items-center"
+                    className="text-left text-gray-700 hover:text-[#006666] transition-colors duration-200 flex items-center"
                   >
                     Contact <FaChevronDown className="ml-1" />
                   </button>
@@ -112,30 +142,30 @@ function App() {
             {isContactOpen && (
               <div className="absolute right-4 mt-2 w-64 bg-white rounded-lg shadow-xl z-50 p-4">
                 <div className="flex items-center mb-4">
-                  <img src="/images/qnb_logo.jpg" alt="QNB Logo" className="w-10 h-10 object-contain" />
-                  <span className="text-xl font-semibold ml-2 text-[#8B1F3F] font-inter">QΝΒ Mobile</span>
+                  <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-10 h-10 object-contain" />
+                  <span className="text-xl font-semibold ml-2 text-[#006666] font-inter">JazzCash Business</span>
                 </div>
                 <div className="space-y-3">
-                  <a href="mailto:info@qnb.qa" className="flex items-center text-gray-700 hover:text-[#8B1F3F]">
+                  <a href="mailto:info@qnb.qa" className="flex items-center text-gray-700 hover:text-[#006666]">
                     <FaEnvelope className="mr-2" /> info@qnb.qa
                   </a>
-                  <a href="tel:+97444490000" className="flex items-center text-gray-700 hover:text-[#8B1F3F]">
+                  <a href="tel:+97444490000" className="flex items-center text-gray-700 hover:text-[#006666]">
                     <FaPhone className="mr-2" /> +974 4449 0000
                   </a>
-                  <a href="https://maps.google.com" className="flex items-center text-gray-700 hover:text-[#8B1F3F]">
+                  <a href="https://maps.google.com" className="flex items-center text-gray-700 hover:text-[#006666]">
                     <FaMapMarkerAlt className="mr-2" /> Doha, Qatar
                   </a>
                   <div className="flex space-x-4 pt-2">
-                    <a href="https://facebook.com/qnbqa" className="text-gray-700 hover:text-[#8B1F3F]">
+                    <a href="https://facebook.com/qnbqa" className="text-gray-700 hover:text-[#006666]">
                       <FaFacebook />
                     </a>
-                    <a href="https://twitter.com/qnbqa" className="text-gray-700 hover:text-[#8B1F3F]">
+                    <a href="https://twitter.com/qnbqa" className="text-gray-700 hover:text-[#006666]">
                       <FaTwitter />
                     </a>
-                    <a href="https://instagram.com/qnbqa" className="text-gray-700 hover:text-[#8B1F3F]">
+                    <a href="https://instagram.com/qnbqa" className="text-gray-700 hover:text-[#006666]">
                       <FaInstagram />
                     </a>
-                    <a href="https://linkedin.com/company/qatar-national-bank" className="text-gray-700 hover:text-[#8B1F3F]">
+                    <a href="https://linkedin.com/company/qatar-national-bank" className="text-gray-700 hover:text-[#006666]">
                       <FaLinkedin />
                     </a>
                   </div>
@@ -143,340 +173,307 @@ function App() {
               </div>
             )}
           </header>
-          
-          {/* Hero Section */}
-          <section className="py-10 md:py-16 mt-20">
-            <div className="container mx-auto">
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#8B1F3F]">
-                    Banking Made Smarter with QΝΒ Mobile
-                  </h1>
-                  <p className="text-lg text-gray-600 mb-8">
-                    Experience seamless banking on the go with QΝΒ Mobile - your complete banking solution in your pocket.
-                  </p>
-                  <motion.button
-                    className="relative bg-green-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-green-500 hover:bg-green-600 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 overflow-hidden group"
-                    onClick={handleDownload}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    disabled={downloadStarted} // Disable during download for clarity
-                  >
-                    {/* Gradient overlay on hover */}
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-lg"></span>
 
-                    {/* Icon */}
-                    <FaDownload className="mr-2 text-white text-xl transition-colors duration-300 group-hover:text-[#C5A05C]" />
+          {/* Download App Button below title under menu */}
+          <div className="w-full flex justify-center mt-4">
+            <button
+              className="bg-[#006666] text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center border-2 border-[#006666] hover:bg-[#009999] hover:border-[#009999] focus:outline-none focus:ring-2 focus:ring-[#006666] focus:ring-opacity-50"
+              onClick={handleDownloadBusinessApk}
+              disabled={downloadStarted}
+            >
+              <FaDownload className="mr-2 text-white text-xl" />
+              <span className="text-lg text-blue-900">Download JazzCash Business App</span>
+              <span className="absolute -right-1 -top-1 bg-white text-[#006666] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>
+            </button>
+          </div>
 
-                    {/* Text */}
-                    <span className="text-lg transition-colors duration-300 group-hover:text-[#C5A05C]">
-                      {downloadStarted ? "Downloading..." : "Download App"}
-                    </span>
-
-                    {/* "Free" badge */}
-                    {!downloadStarted && (
-                      <span className="absolute -right-1 -top-1 bg-[#C5A05C] text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-semibold animate-pulse">
-                        Free
-                      </span>
-                    )}
-                  </motion.button>
-
-                  {downloadStarted && (
-                    <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5">
-                      <div 
-                        className="bg-[#8B1F3F] h-2.5 rounded-full transition-all duration-300 ease-out"
-                        style={{ width: `${progress}%` }}
-                      ></div>
-                    </div>
-                  )}
-                </div>
-                <motion.div 
-                  className="md:w-1/2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <img 
-                    src="/images/hero-image.png" 
-                    alt="QNB Mobile App Preview" 
-                    className="w-full h-auto rounded-lg shadow-xl"
-                  />
-                </motion.div>
-              </div>
-            </div>
-          </section>
-          
-          {/* Features Section */}
-          <section id="features" className="py-4">
-            <div className="container mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">Powerful Features</h2>
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Discover why millions of customers trust QΝΒ Mobile for their banking needs
-                </p>
-              </div>
-              
-              <div className="flex overflow-x-auto pb-8 space-x-4 snap-x scrollbar-hide">
-                <motion.div 
-                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="p-4">
-                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaMobileAlt className="text-2xl text-[#8B1F3F]" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Biometric Login</h3>
-                    <p className="text-gray-600 text-center">
-                      Secure and quick access with fingerprint and face recognition authentication
-                    </p>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <div className="p-4">
-                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaExchangeAlt className="text-2xl text-[#8B1F3F]" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Instant Transfers</h3>
-                    <p className="text-gray-600 text-center">
-                      Send money locally and internationally with competitive exchange rates
-                    </p>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <div className="p-4">
-                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaCreditCard className="text-2xl text-[#8B1F3F]" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Card Management</h3>
-                    <p className="text-gray-600 text-center">
-                      Control your cards, set limits, freeze/unfreeze, and view transactions
-                    </p>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  <div className="p-4">
-                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaBell className="text-2xl text-[#8B1F3F]" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Real-time Alerts</h3>
-                    <p className="text-gray-600 text-center">
-                      Stay informed with instant notifications for all account activities
-                    </p>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <div className="p-4">
-                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaQrcode className="text-2xl text-[#8B1F3F]" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">QR Payments</h3>
-                    <p className="text-gray-600 text-center">
-                      Make contactless payments quickly using QR code technology
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-          
-          {/* Screenshots Section */}
-          <section id="screenshots" className="py-8">
-            <div className="container mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">App Screenshots</h2>
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Take a closer look at the sleek interface and powerful features of QΝΒ Mobile
-                </p>
-              </div>
-              
-              <div className="flex overflow-x-auto pb-8 space-x-6 snap-x scrollbar-hide">
-                <motion.img 
-                  src="/cbq-assets/screenshot1.webp" 
-                  alt="QNB Mobile Banking Home Screen" 
-                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                />
-                <motion.img 
-                  src="/cbq-assets/screenshot2.webp" 
-                  alt="QNB Mobile Banking Transactions Screen" 
-                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                />
-                <motion.img 
-                  src="/cbq-assets/screenshot3.webp" 
-                  alt="QNB Mobile Banking Account Screen" 
-                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                />
-                <motion.img 
-                  src="/cbq-assets/screenshot4.webp" 
-                  alt="QNB Mobile Banking Settings Screen" 
-                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                />
-                <motion.img 
-                  src="/cbq-assets/screenshot5.webp" 
-                  alt="QNB Mobile Banking New Feature Screen" 
-                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                />
-              </div>
-            </div>
-          </section>
-          
-          {/* Download Section */}
-          <section id="download" className="py-8 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] relative">
-            <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div className="container mx-auto text-center relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">Download QΝΒ Mobile Today</h2>
-              <p className="text-lg mb-6 max-w-3xl mx-auto text-white drop-shadow-md">
-                Join millions of satisfied customers who trust QΝΒ Mobile for their banking needs. Download now and experience banking at your fingertips.
+          {/* Mobile-First Hero Section: CM Punjab Loan Scheme */}
+          <section
+            className="w-full py-10 px-3 text-white text-center rounded-2xl shadow-2xl mt-6 mx-auto max-w-sm mb-4"
+            style={{ background: '#006666' }}
+          >
+            <div className="relative z-10">
+              <h1 className="text-2xl font-extrabold mb-4 drop-shadow-lg leading-tight tracking-tight text-white">
+                Apply for CM Punjab Asaan Karobar Loan
+              </h1>
+              <p className="text-base mb-3 max-w-xs mx-auto drop-shadow-md font-medium text-white">
+                Interest-free loans up to <span className="font-bold text-[#F7B500]">PKR 30 Million</span>, powered by JazzCash Business.
               </p>
-              <motion.button 
-                className="bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] hover:from-[#C5A05C] hover:to-[#8B1F3F] text-white font-bold py-4 px-10 rounded-lg shadow-xl transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white relative overflow-hidden group"
-                onClick={handleDownload}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <div className="border-b border-white/20 w-full mb-3"></div>
+              <p className="text-base max-w-xs mx-auto drop-shadow-md font-medium text-white">
+                This offer is for JazzCash app users to upgrade their app to JazzCash Business app to apply online for loan. Download application now.
+              </p>
+              <button
+                className="bg-white text-green-800 font-extrabold px-6 py-3 rounded-full shadow-xl hover:bg-gray-50 transition-all duration-300 mb-6 border-2 border-green-300 text-base drop-shadow-lg focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-opacity-50 w-full relative z-10 hover:text-green-700 flex items-center justify-center hover:border-green-400"
+                onClick={handleDownloadBusinessApk}
               >
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 text-[#712241] border-2 border-[#C5A05C] rounded-lg"></span>
-                <FaDownload className="mr-3 text-white text-xl" /> 
-                <span className="text-lg text-blue-900">{downloadStarted ? 'Downloading...' : 'Download APK'}</span>
-                {!downloadStarted && <span className="absolute -right-1 -top-1 bg-white text-[#8B1F3F] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
-              </motion.button>
-              {downloadStarted && (
-                <div className="mt-6 w-full max-w-xs mx-auto bg-white bg-opacity-50 rounded-full h-2.5">
-                  <div 
-                    className="bg-white h-2.5 rounded-full transition-all duration-300 ease-out"
-                    style={{ width: `${progress}%` }}
-                  ></div>
+                <FaDownload className="mr-2 text-green-800 text-xl" />
+                Download Application
+              </button>
+              {/* Dashboard-like Loan Highlights - Horizontal for Mobile (inside hero) */}
+              <div className="flex flex-row justify-between gap-3 mt-4">
+                <div className="bg-[#004d40] flex-1 rounded-xl px-2 py-4 shadow-md flex flex-col items-center min-w-0">
+                  <span className="block text-lg font-bold text-[#F7B500]">10,000+</span>
+                  <span className="block text-xs font-medium text-white mt-1">Beneficiaries</span>
                 </div>
-              )}
+                <div className="bg-[#004d40] flex-1 rounded-xl px-2 py-4 shadow-md flex flex-col items-center min-w-0">
+                  <span className="block text-lg font-bold text-[#F7B500]">5 Years</span>
+                  <span className="block text-xs font-medium text-white mt-1">Repayment</span>
+                </div>
+                <div className="bg-[#004d40] flex-1 rounded-xl px-2 py-4 shadow-md flex flex-col items-center min-w-0">
+                  <span className="block text-lg font-bold text-[#F7B500]">0%</span>
+                  <span className="block text-xs font-medium text-white mt-1">Interest</span>
+                </div>
+              </div>
             </div>
           </section>
-          
+
+          {/* CM Punjab Asaan Karobar Scheme Banner - Retry with fixed aspect ratio and fallback */}
+          <section className="w-full max-w-sm mx-auto my-6 flex justify-center">
+            <img 
+              src="https://www.samaa.tv/images/asaan-karobar-punjab-maryam-latest-apply.jpg" 
+              alt="CM Punjab Asaan Karobar Scheme Banner" 
+              className="w-full max-h-52 rounded-xl shadow-lg object-cover bg-gray-100" 
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+          </section>
+
+          {/* Hero Section with Image */}
+          <section className="relative w-full py-12 md:py-24 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="relative aspect-video w-full rounded-lg overflow-hidden">
+                <img
+                  src="/images/hero_jazzcash.jpg"
+                  alt="JazzCash Hero"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <div className="mt-8 text-center">
+                <h1 className="text-4xl md:text-5xl font-bold text-[#006666] mb-4">Welcome to JazzCash Business</h1>
+                <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+                  Experience seamless digital banking with JazzCash. Manage your finances, transfer money, and much more—all in one secure app.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* --- Other Components / Steps (Placeholder for 2 steps) --- */}
+          <section className="my-8 max-w-sm mx-auto">
+            <div className="bg-white rounded-xl shadow-md p-5 mb-5">
+              <h3 className="text-lg font-bold text-[#006666] mb-2">Step 1: Download JazzCash Business App</h3>
+              <p className="text-gray-700 text-sm">Download and install the JazzCash Business app from the Play Store or App Store to start your application for the CM Punjab Asaan Karobar Loan.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-md p-5">
+              <h3 className="text-lg font-bold text-[#006666] mb-2">Step 2: Register & Apply</h3>
+              <p className="text-gray-700 text-sm">Open the app, register your business account, and follow the instructions to apply for the loan scheme directly from your phone.</p>
+            </div>
+          </section>
+
+          {/* Mobile-First Screenshots Section */}
+          <section id="screenshots" className="py-8">
+            <div className="mx-auto max-w-sm">
+              <div className="text-center mb-6">
+                <h2 className="text-xl font-bold mb-2 text-[#006666]">App Screenshots</h2>
+                <p className="text-base text-gray-600 max-w-xs mx-auto">
+                  Take a closer look at the sleek interface and powerful features of JazzCash Business
+                </p>
+              </div>
+              <div className="flex overflow-x-auto pb-6 space-x-4 snap-x scrollbar-hide justify-start">
+                <img 
+                  src="/cbq-assets/screenshot1.jpeg" 
+                  alt="JazzCash Business App Preview 1" 
+                  className="w-52 h-40 rounded-lg shadow-lg snap-start bg-white object-contain" 
+                />
+                <img 
+                  src="/cbq-assets/screenshot2.png" 
+                  alt="JazzCash Business App Preview 2" 
+                  className="w-52 h-40 rounded-lg shadow-lg snap-start bg-white object-contain" 
+                />
+                <img 
+                  src="/cbq-assets/screenshot3.png" 
+                  alt="JazzCash Business App Preview 3" 
+                  className="w-52 h-40 rounded-lg shadow-lg snap-start bg-white object-contain" 
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* Scheme Highlights Section */}
+          <section className="my-12 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="bg-[#f3f3f3] rounded-lg shadow p-6">
+              <h3 className="text-[#006666] text-2xl font-bold mb-2">PKR 1,000,000 – 30,000,000</h3>
+              <p className="text-gray-700">Loan Amount Range</p>
+            </div>
+            <div className="bg-[#f3f3f3] rounded-lg shadow p-6">
+              <h3 className="text-[#006666] text-2xl font-bold mb-2">Interest-Free</h3>
+              <p className="text-gray-700">No markup or interest for applicants</p>
+            </div>
+            <div className="bg-[#f3f3f3] rounded-lg shadow p-6">
+              <h3 className="text-[#006666] text-2xl font-bold mb-2">Flexible Repayment</h3>
+              <p className="text-gray-700">Up to 5 years (60 monthly installments)</p>
+            </div>
+          </section>
+
+          {/* Loan Application Multi-Step Form */}
+          <section id="loan-application-form" className="my-16 max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-[#006666] mb-6 text-center">How to Apply</h2>
+            <p className="text-gray-700 text-center mb-6">
+              To apply for the CM Punjab Asaan Karobar Loan, please download the official JazzCash Business mobile app. The complete digital loan application form is available inside the app for your convenience and security.
+            </p>
+            <div className="flex flex-col items-center gap-4">
+              <button
+                className="bg-[#006666] text-white font-bold py-3 px-8 rounded-lg shadow hover:bg-[#009999] transition flex items-center"
+                onClick={handleDownloadBusinessApk}
+                disabled={downloadStarted}
+              >
+                <FaDownload className="mr-2 text-white text-xl" /> 
+                <span className="text-lg text-blue-900">Download JazzCash Business App</span>
+                <span className="absolute -right-1 -top-1 bg-white text-[#006666] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>
+              </button>
+              <span className="text-sm text-gray-500">Available for Android. Fill out your loan application securely in the app.</span>
+            </div>
+          </section>
+
           {/* FAQ Section */}
           <section id="faq" className="py-8">
             <div className="container mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">Frequently Asked Questions</h2>
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Find answers to common questions about QΝΒ Mobile Banking
+              <div className="text-center mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold mb-3 text-[#006666]">Frequently Asked Questions</h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Find answers to common questions about JazzCash Business Banking and the CM Punjab Asaan Karobar Loan Scheme
                 </p>
               </div>
               
-              <div className="max-w-3xl mx-auto space-y-4">
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="max-w-2xl mx-auto space-y-4">
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
                   <button 
-                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
                     onClick={() => toggleFaq(0)}
                   >
-                    <h3 className="text-xl font-semibold text-[#333333]">Is QΝΒ Mobile Banking secure?</h3>
-                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(0) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <h3 className="text-lg font-semibold text-[#333333]">Is JazzCash Business Banking secure?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(0) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
                   {openFaqs.includes(0) && (
-                    <div className="px-6 pb-6 text-gray-600">
+                    <div className="px-4 pb-4 text-gray-600">
                       <p>
-                        Yes, QΝΒ Mobile Banking uses state-of-the-art security measures including biometric authentication, encryption, and fraud monitoring systems to keep your information safe.
+                        Yes, JazzCash Business Banking uses state-of-the-art security measures including biometric authentication, encryption, and fraud monitoring systems to keep your information safe.
                       </p>
                     </div>
                   )}
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
                   <button 
-                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
                     onClick={() => toggleFaq(1)}
                   >
-                    <h3 className="text-xl font-semibold text-[#333333]">How do I register for QΝΒ Mobile Banking?</h3>
-                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(1) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <h3 className="text-lg font-semibold text-[#333333]">How do I register for JazzCash Business Banking?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(1) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
                   {openFaqs.includes(1) && (
-                    <div className="px-6 pb-6 text-gray-600">
+                    <div className="px-4 pb-4 text-gray-600">
                       <p>
-                        Download the app, click on "Register," and follow the on-screen instructions. You'll need your QNB debit card details and registered mobile number to complete the registration.
+                        Download the app, click on "Register," and follow the on-screen instructions. You'll need your JazzCash Business debit card details and registered mobile number to complete the registration.
                       </p>
                     </div>
                   )}
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
                   <button 
-                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
                     onClick={() => toggleFaq(2)}
                   >
-                    <h3 className="text-xl font-semibold text-[#333333]">What features are available on QΝΒ Mobile?</h3>
-                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(2) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <h3 className="text-lg font-semibold text-[#333333]">What features are available on JazzCash Business?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(2) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
                   {openFaqs.includes(2) && (
-                    <div className="px-6 pb-6 text-gray-600">
+                    <div className="px-4 pb-4 text-gray-600">
                       <p>
-                        QΝΒ Mobile offers account management, fund transfers, bill payments, card controls, QR payments, real-time alerts, and many more features to make banking convenient.
+                        JazzCash Business offers account management, fund transfers, bill payments, card controls, QR payments, real-time alerts, and many more features to make banking convenient.
                       </p>
                     </div>
                   )}
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
                   <button 
-                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
                     onClick={() => toggleFaq(3)}
                   >
-                    <h3 className="text-xl font-semibold text-[#333333]">Is there a fee for using QΝΒ Mobile Banking?</h3>
-                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(3) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <h3 className="text-lg font-semibold text-[#333333]">Who can apply for the loan?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(4) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
-                  {openFaqs.includes(3) && (
-                    <div className="px-6 pb-6 text-gray-600">
+                  {openFaqs.includes(4) && (
+                    <div className="px-4 pb-4 text-gray-600">
                       <p>
-                        No, the QΝΒ Mobile Banking app is free to download and use. Standard data charges from your mobile service provider may apply.
+                        Any resident of Punjab with a valid CNIC, looking to start or expand a business, can apply.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(5)}
+                  >
+                    <h3 className="text-lg font-semibold text-[#333333]">What documents are needed for the loan application?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(5) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(5) && (
+                    <div className="px-4 pb-4 text-gray-600">
+                      <p>
+                        CNIC, business details, income proof, and supporting documents as required by the scheme.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(6)}
+                  >
+                    <h3 className="text-lg font-semibold text-[#333333]">Is the loan really interest-free?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(6) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(6) && (
+                    <div className="px-4 pb-4 text-gray-600">
+                      <p>
+                        Yes, the scheme offers 0% markup for all approved loans.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(7)}
+                  >
+                    <h3 className="text-lg font-semibold text-[#333333]">How long does loan approval take?</h3>
+                    <span className="text-[#006666] transition-transform duration-300" style={{ transform: openFaqs.includes(7) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(7) && (
+                    <div className="px-4 pb-4 text-gray-600">
+                      <p>
+                        Processing time may vary, but JazzCash Business aims to make it as fast and digital as possible.
                       </p>
                     </div>
                   )}
@@ -486,72 +483,86 @@ function App() {
           </section>
           
           {/* Footer */}
-          <footer className="bg-gray-900 text-white py-8">
+          <footer className="bg-[#006666] text-white py-12">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div>
-                  <div className="flex items-center mb-4">
-                    <img src="/images/qnb_logo.jpg" alt="QNB Logo" className="w-10 h-10 object-contain" />
-                    <span className="text-xl font-semibold ml-2 text-white font-inter">QΝΒ Mobile</span>
+                  <div className="flex items-center mb-6">
+                    <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-12 h-12 object-contain" />
+                    <span className="text-2xl font-bold ml-3">JazzCash Business</span>
                   </div>
-                  <p className="text-gray-400 mb-4 text-sm md:text-base">
-                    QΝΒ Mobile Banking app provides secure and convenient banking services on your smartphone. 
-                    Download now and experience banking at your fingertips.
+                  <p className="text-gray-200 mb-6 text-base">
+                    Your trusted partner for digital banking solutions. Experience seamless, secure, and convenient banking with JazzCash Business.
                   </p>
                   <div className="flex space-x-4">
-                    <a href="https://facebook.com/qnbqa" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaFacebook />
+                    <a href="https://facebook.com/qnbqa" className="text-white hover:text-[#009999] transition-colors duration-200">
+                      <FaFacebook className="text-xl" />
                     </a>
-                    <a href="https://twitter.com/qnbqa" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaTwitter />
+                    <a href="https://twitter.com/qnbqa" className="text-white hover:text-[#009999] transition-colors duration-200">
+                      <FaTwitter className="text-xl" />
                     </a>
-                    <a href="https://instagram.com/qnbqa" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaInstagram />
+                    <a href="https://instagram.com/qnbqa" className="text-white hover:text-[#009999] transition-colors duration-200">
+                      <FaInstagram className="text-xl" />
                     </a>
-                    <a href="https://linkedin.com/company/qatar-national-bank" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaLinkedin />
+                    <a href="https://linkedin.com/company/qatar-national-bank" className="text-white hover:text-[#009999] transition-colors duration-200">
+                      <FaLinkedin className="text-xl" />
                     </a>
                   </div>
                 </div>
                 
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 text-[#C5A05C]">Quick Links</h3>
-                  <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
-                    <a href="#features" className="text-gray-400 hover:text-white transition-colors duration-200">Features</a>
-                    <a href="#screenshots" className="text-gray-400 hover:text-white transition-colors duration-200">Screenshots</a>
-                    <a href="#download" className="text-gray-400 hover:text-white transition-colors duration-200">Download</a>
-                    <a href="#faq" className="text-gray-400 hover:text-white transition-colors duration-200">FAQ</a>
-                    <a href="https://www.qnb.com/en/personal/ways-to-bank/mobile-and-internet-banking" className="text-gray-400 hover:text-white transition-colors duration-200">Learn More</a>
-                    <a href="#" onClick={(e) => {e.preventDefault(); setIsContactOpen(!isContactOpen);}} className="text-gray-400 hover:text-white transition-colors duration-200">Contact</a>
+                <div className="md:col-span-2 lg:col-span-1">
+                  <div className="grid grid-cols-1 gap-8">
+                    <div>
+                      <h3 className="text-xl font-bold mb-6">Quick Links</h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col">
+                          <a href="#features" className="text-gray-200 hover:text-white transition-colors duration-200">Why Apply</a>
+                          <a href="#download" className="text-gray-200 hover:text-white transition-colors duration-200">Download App</a>
+                        </div>
+                        <div className="flex flex-col">
+                          <a href="#faq" className="text-gray-200 hover:text-white transition-colors duration-200">FAQ</a>
+                          <a href="https://www.qnb.com/en/personal/ways-to-bank/mobile-and-internet-banking" className="text-gray-200 hover:text-white transition-colors duration-200">Learn More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-6">Loan Scheme</h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col">
+                          <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">About the Scheme</a>
+                          <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">Eligibility</a>
+                        </div>
+                        <div className="flex flex-col">
+                          <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">Application Process</a>
+                          <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">Benefits</a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-[#C5A05C]">Contact Us</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center">
-                      <FaEnvelope className="text-gray-400 mr-2" /> 
-                      <a href="mailto:info@qnb.qa" className="text-gray-400 hover:text-white transition-colors duration-200">info@qnb.qa</a>
-                    </li>
-                    <li className="flex items-center">
-                      <FaPhone className="text-gray-400 mr-2" /> 
-                      <a href="tel:+97444490000" className="text-gray-400 hover:text-white transition-colors duration-200">+974 4449 0000</a>
-                    </li>
-                    <li className="flex items-center">
-                      <FaMapMarkerAlt className="text-gray-400 mr-2" /> 
-                      <span className="text-gray-400">Commercial Bank Plaza, Doha, Qatar</span>
-                    </li>
-                  </ul>
+                  <h3 className="text-xl font-bold mb-6">Contact Us</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center text-gray-200">
+                      <FaPhone className="mr-3 text-xl" />
+                      <a href="tel:+923001234567" className="hover:text-white transition-colors duration-200">+92 300 123 4567</a>
+                    </div>
+                    <div className="flex items-center text-gray-200">
+                      <FaEnvelope className="mr-3 text-xl" />
+                      <a href="mailto:info@jazzcash.com.pk" className="hover:text-white transition-colors duration-200">info@jazzcash.com.pk</a>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div className="border-t border-gray-800 mt-6 pt-4 text-center text-gray-500 text-sm">
-                <p>&copy; {new Date().getFullYear()} Qatar National Bank. All rights reserved.</p>
-                <p className="mt-2">
-                  <a href="#" className="text-gray-500 hover:text-gray-400 mx-2">Privacy Policy</a>
-                  <a href="#" className="text-gray-500 hover:text-gray-400 mx-2">Terms of Service</a>
-                  <a href="#" className="text-gray-500 hover:text-gray-400 mx-2">Security</a>
-                </p>
+              <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-200 text-sm">
+                <p>&copy; {new Date().getFullYear()} JazzCash Business. All rights reserved.</p>
+                <div className="mt-4 flex justify-center space-x-4">
+                  <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">Privacy Policy</a>
+                  <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">Terms of Service</a>
+                  <a href="#" className="text-gray-200 hover:text-white transition-colors duration-200">Security</a>
+                </div>
               </div>
             </div>
           </footer>
