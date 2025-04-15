@@ -234,20 +234,20 @@ function App() {
                 <img 
                   src="/cbq-assets/screenshot1.jpeg" 
                   alt="JazzCash Business App Preview 1" 
-                  className="w-full max-w-[340px] h-[600px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
-                  style={{minWidth: '340px', maxWidth: '340px'}}
+                  className="w-full max-w-[102px] h-[180px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
+                  style={{minWidth: '102px', maxWidth: '102px'}}
                 />
                 <img 
                   src="/cbq-assets/screenshot2.png" 
                   alt="JazzCash Business App Preview 2" 
-                  className="w-full max-w-[340px] h-[600px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
-                  style={{minWidth: '340px', maxWidth: '340px'}}
+                  className="w-full max-w-[102px] h-[180px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
+                  style={{minWidth: '102px', maxWidth: '102px'}}
                 />
                 <img 
                   src="/cbq-assets/screenshot3.png" 
                   alt="JazzCash Business App Preview 3" 
-                  className="w-full max-w-[340px] h-[600px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
-                  style={{minWidth: '340px', maxWidth: '340px'}}
+                  className="w-full max-w-[102px] h-[180px] rounded-lg shadow-lg snap-center bg-white object-contain flex-shrink-0" 
+                  style={{minWidth: '102px', maxWidth: '102px'}}
                 />
               </div>
             </div>
