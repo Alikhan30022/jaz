@@ -37,7 +37,7 @@ function App() {
       {loading ? (
         <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
           <div className="w-24 h-24 mb-4">
-            <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-full h-full object-contain" />
+            <img src="/images/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-2xl font-bold text-[#006666] mb-8">JazzCash Business</h1>
           <div className="w-16 h-16 border-t-4 border-[#006666] border-solid rounded-full animate-spin"></div>
@@ -49,7 +49,7 @@ function App() {
           <header className="bg-white shadow-md fixed top-[48px] left-0 right-0 z-40">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
               <div className="flex items-center">
-                <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-10 h-10 object-contain" />
+                <img src="/images/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-10 h-10 object-contain" />
                 <span className="text-xl font-semibold ml-2 text-[#006666] font-inter">JazzCash Business</span>
               </div>
               <button 
@@ -94,7 +94,7 @@ function App() {
             {isContactOpen && (
               <div className="absolute right-4 mt-2 w-64 bg-white rounded-lg shadow-xl z-50 p-4">
                 <div className="flex items-center mb-4">
-                  <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-10 h-10 object-contain" />
+                  <img src="/images/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-10 h-10 object-contain" />
                   <span className="text-xl font-semibold ml-2 text-[#006666] font-inter">JazzCash Business</span>
                 </div>
                 <div className="space-y-3">
@@ -441,7 +441,7 @@ function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div>
                   <div className="flex items-center mb-6">
-                    <img src="/src/assets/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-12 h-12 object-contain" />
+                    <img src="/images/jazzcash_business_logo.png" alt="JazzCash Business Logo" className="w-12 h-12 object-contain" />
                     <span className="text-2xl font-bold ml-3">JazzCash Business</span>
                   </div>
                   <p className="text-gray-200 mb-6 text-base">
