@@ -1,33 +1,10 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FaDownload, FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaBars, FaTimes, FaChevronDown, FaCreditCard, FaExchangeAlt, FaMobileAlt, FaBell, FaQrcode } from 'react-icons/fa';
-
-function FaqCollapse({ question, answer }: { question: string, answer: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="bg-[#f3f3f3] rounded-lg shadow-md overflow-hidden">
-      <button
-        className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
-        onClick={() => setOpen((v) => !v)}
-      >
-        <h3 className="text-xl font-semibold text-[#006666]">{question}</h3>
-        <span className={`text-[#006666] text-2xl transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>⌄</span>
-      </button>
-      {open && (
-        <div className="px-6 pb-6 text-gray-700 animate-fade-in">
-          {answer}
-        </div>
-      )}
-    </div>
-  );
-}
+import { FaDownload, FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [downloadStarted, setDownloadStarted] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [openFaqs, setOpenFaqs] = useState<number[]>([]);
 
   const toggleFaq = (index: number) => {
@@ -44,31 +21,6 @@ function App() {
     }, 2000); // 2 seconds (2,000 ms)
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (downloadStarted) {
-      const interval = setInterval(() => {
-        setProgress((prevProgress) => {
-          const newProgress = prevProgress + 10;
-          if (newProgress >= 100) {
-            clearInterval(interval);
-            setTimeout(() => setDownloadStarted(false), 500);
-            return 100;
-          }
-          return newProgress;
-        });
-      }, 300);
-      return () => clearInterval(interval);
-    }
-  }, [downloadStarted]);
-
-  const handleDownload = () => {
-    setDownloadStarted(true);
-    setProgress(0);
-    setTimeout(() => {
-      window.location.href = "/QΝΒ mobile.apk";
-    }, 3000);
-  };
 
   const handleDownloadBusinessApk = () => {
     // Create a temporary link to trigger the download
@@ -179,7 +131,6 @@ function App() {
             <button
               className="bg-[#006666] text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center border-2 border-[#006666] hover:bg-[#009999] hover:border-[#009999] focus:outline-none focus:ring-2 focus:ring-[#006666] focus:ring-opacity-50"
               onClick={handleDownloadBusinessApk}
-              disabled={downloadStarted}
             >
               <FaDownload className="mr-2 text-white text-xl" />
               <span className="text-lg text-blue-900">Download JazzCash Business App</span>
@@ -325,7 +276,6 @@ function App() {
               <button
                 className="bg-[#006666] text-white font-bold py-3 px-8 rounded-lg shadow hover:bg-[#009999] transition flex items-center"
                 onClick={handleDownloadBusinessApk}
-                disabled={downloadStarted}
               >
                 <FaDownload className="mr-2 text-white text-xl" /> 
                 <span className="text-lg text-blue-900">Download JazzCash Business App</span>
