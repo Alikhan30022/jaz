@@ -253,19 +253,32 @@ function App() {
             </div>
           </section>
 
-          {/* Scheme Highlights Section */}
-          <section className="my-12 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-[#f3f3f3] rounded-lg shadow p-6">
-              <h3 className="text-[#006666] text-2xl font-bold mb-2">PKR 1,000,000 – 30,000,000</h3>
-              <p className="text-gray-700">Loan Amount Range</p>
+          {/* Scheme Highlights Section - Improved UI/UX */}
+          <section className="my-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 text-center">
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center border border-[#e0e0e0] hover:shadow-xl transition">
+              <span className="text-4xl text-[#006666] mb-3"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' className='w-10 h-10'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z' /><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z' /></svg></span>
+              <h3 className="text-[#006666] text-lg font-bold mb-2">Loan Amount</h3>
+              <p className="text-gray-700 text-base">Up to PKR 30,000,000</p>
             </div>
-            <div className="bg-[#f3f3f3] rounded-lg shadow p-6">
-              <h3 className="text-[#006666] text-2xl font-bold mb-2">Interest-Free</h3>
-              <p className="text-gray-700">No markup or interest for applicants</p>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center border border-[#e0e0e0] hover:shadow-xl transition">
+              <span className="text-4xl text-[#006666] mb-3"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' className='w-10 h-10'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8v4l3 3' /></svg></span>
+              <h3 className="text-[#006666] text-lg font-bold mb-2">Interest-Free</h3>
+              <p className="text-gray-700 text-base">Shariah-compliant, no markup or interest</p>
             </div>
-            <div className="bg-[#f3f3f3] rounded-lg shadow p-6">
-              <h3 className="text-[#006666] text-2xl font-bold mb-2">Flexible Repayment</h3>
-              <p className="text-gray-700">Up to 5 years (60 monthly installments)</p>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center border border-[#e0e0e0] hover:shadow-xl transition">
+              <span className="text-4xl text-[#006666] mb-3"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' className='w-10 h-10'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8v8m0 0l-3-3m3 3l3-3' /></svg></span>
+              <h3 className="text-[#006666] text-lg font-bold mb-2">Flexible Repayment</h3>
+              <p className="text-gray-700 text-base">Easy monthly installments over 5 years</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center border border-[#e0e0e0] hover:shadow-xl transition">
+              <span className="text-4xl text-[#006666] mb-3"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' className='w-10 h-10'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 01.88 7.903A4.001 4.001 0 0112 19a4 4 0 01-4-4V7' /></svg></span>
+              <h3 className="text-[#006666] text-lg font-bold mb-2">Eligibility</h3>
+              <p className="text-gray-700 text-base">Pakistani nationals, SMEs, women entrepreneurs</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center border border-[#e0e0e0] hover:shadow-xl transition">
+              <span className="text-4xl text-[#006666] mb-3"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' className='w-10 h-10'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M13 16h-1v-4h-1m2-4h.01' /></svg></span>
+              <h3 className="text-[#006666] text-lg font-bold mb-2">Quick Disbursal</h3>
+              <p className="text-gray-700 text-base">Fast processing & transparent procedures</p>
             </div>
           </section>
 
